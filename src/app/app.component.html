@@ -1,86 +1,110 @@
 <div class="container">
   <div class="row pt-3">
-  <div class="col-6">
-    <h4>Employee Portal</h4>
-  </div>
-
-  <div class="col-6 text-end">
-    <button class="btn btn-outline-success" (click)="openModel()">Add</button>
-  </div>
-</div>
-
-<div class="row">
-  @for (item of employeeList; track $index) {
-  <div class="col-4">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-6">
-            {{item.name}}
-          </div>
-          <div class="col-6 text-end">
-            {{item.mobileNumber}}
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        {{item.email}}
-      </div>
-      <div class="card-body">
-        {{item.address}}
-      </div>
-      <div class="card-footer">
-        <div class="btn btn-sm btn-primary" (click)="onEdit(item)">Edit</div>
-        <div class="btn btn-sm btn-danger" (click)="onDelete(item)" >Delete</div>
-      </div>
+    <div class="col-6">
+      <h4>Employee Management System</h4>
     </div>
-  </div>
-}
+<hr>
+    <div class="col-12 text-end">
+      <button class="btn btn-outline-success" (click)="openModel()">Add</button>
+    </div>
 </div>
+<hr>
+
+<h5><u>List Of Employees</u></h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeList">
+        <td class="">{{item.name}}</td>
+        <td class="">{{item.mobileNumber}}</td>
+        <td class="">{{item.email}}</td>
+        <td class="">{{item.address}}</td>
+        <div class="d-flex gap-3">
+          <div class="btn btn-sm btn-primary" (click)="onEdit(item)">Edit</div>
+            <div class="btn btn-sm btn-danger" (click)="onDelete(item)">
+              Delete
+            </div>
+        </div>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 
 <div class="modal" id="myModal" #myModal>
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-header">
-        <h4 class="modal-title">Create New</h4>
+        <h4 class="modal-title">Enter Your:</h4>
         <button type="button" class="btn-close" (click)="closeModel()"></button>
       </div>
 
       <div class="modal-body">
-        <div class="row">
-          <div class="col-8">
+          <div class="col-12">
             <label for="" class="">Name:</label>
-            <input type="text" [(ngModel)]="employeeObj.name" class="form-control" placeholder="Name">
+            <input
+              type="text"
+              [(ngModel)]="employeeObj.name"
+              class="form-control"
+              placeholder="Enter Name"
+            />
           </div>
+          <div class="col-12">
+            <label for="" class="">Mobile No</label>
+            <input
+              type="text"
+              [(ngModel)]="employeeObj.mobileNumber"
+              class="form-control"
+              placeholder="Enter Mobile No"
+            />
           </div>
-          <div class="row">
-          <div class="col-6">
-            <label for="Name" class="">Mobile No</label>
-            <input type="text" [(ngModel)]="employeeObj.mobileNumber" class="form-control" placeholder="Mobile No">
-            </div>
-            <div class="col-6">
-              <label for="Name" class="">Email</label>
-              <input type="text" [(ngModel)]="employeeObj.email" class="form-control" placeholder="Email">
-              </div>
-            <div class="col-12">
-              <label for="Name" class="">Address</label>
-              <textarea rows="3" [(ngModel)]="employeeObj.address" class="form-control"></textarea>
-            </div>
+          <div class="col-12">
+            <label for="" class="">Email</label>
+            <input
+              type="text"
+              [(ngModel)]="employeeObj.email"
+              class="form-control"
+              placeholder="Enter Email"
+            />
           </div>
-      </div>
+          <div class="col-12">
+            <label for="" class="">Address</label>
+            <input
+            type="text"
+              [(ngModel)]="employeeObj.address"
+              class="form-control"
+              placeholder="Enter Address"
+            >
+          </div>
+    </div>
+
 
       <div class="modal-footer">
         @if(employeeObj.id == 0){
-        <button type="button" class="btn btn-primary" (click)="saveEmployee()">Save</button>
+        <button type="button" class="btn btn-primary" (click)="saveEmployee()">
+          Save
+        </button>
+        } @else {
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updateEmployee()"
+        >
+          Update
+        </button>
         }
-        @else {
-          <button type="button" class="btn btn-primary" (click)="updateEmployee()">Update</button>
-        }
-        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+        <button type="button" class="btn btn-danger" (click)="closeModel()">
+          Close
+        </button>
       </div>
-
     </div>
   </div>
 </div>
