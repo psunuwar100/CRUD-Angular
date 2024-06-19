@@ -80,13 +80,15 @@ export class AppComponent implements OnInit {
   onDelete(item: Employee) {
     const isDelete = confirm('Really??');
     if (isDelete) {
-      const currentRecord = this.employeeList.findIndex(
-        (m) => m.id === this.employeeObj.id
+      const currentRecordIndex = this.employeeList.findIndex(
+        (m) => m.id === item.id
       );
-      this.employeeList.splice(currentRecord, 1);
-      localStorage.setItem('crud', JSON.stringify(this.employeeList));
+      if (currentRecordIndex !== -1) {
+        this.employeeList.splice(currentRecordIndex, 1);
+        localStorage.setItem('crud', JSON.stringify(this.employeeList));
+      }
     }
-  }
+  }  
 }
 
 export class Employee {
